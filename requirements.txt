@@ -42,3 +42,7 @@ urllib3==1.26.17
 wcwidth==0.1.9
 websocket-client==0.59.0
 Werkzeug==3.0.0
+numpy
+opencv-python
+firebase-admin
+grpcio

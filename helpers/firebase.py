@@ -1,0 +1,32 @@
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+class FirebaseHelper:
+
+    def __init__(self):
+        cred = credentials.Certificate('./helpers/firebase_key_hackaton.json')
+        firebase_admin.initialize_app(cred)
+
+        self.db = firestore.client()
+
+    def create_data(self, collection ="lote", document="x"):
+        doc_ref = self.db.collection(collection).document(document)
+        doc_ref.set({'field_name': 'value'})
+
+    def read_data(self, document_id):
+        doc_ref = self.db.collection('collection_name').document(document_id)
+        doc = doc_ref.get()
+        if doc.exists:
+            print(doc.to_dict())
+        else:
+            print("No such document!")
+
+    def update_data(self, document_id):
+        doc_ref = self.db.collection('collection_name').document(document_id)
+        doc_ref.update({
+            'field_name': 'new_value',
+            # ... update more fields ...
+        })
+
+    def delete_data(self, document_id):
+        self.db.collection('collection_name').document(document_id).delete()
