@@ -22,6 +22,11 @@ class MeasureCube:
         firebase.create_data(cls.collection, cls.measurement_document, data)
 
     @classmethod
+    def clean_measurement(cls, firebase):
+        firebase.update_data(cls.collection, cls.measurement_document, {"cube_identifier": None})
+        
+
+    @classmethod
     def measure_distances(cls, request):
         """
             raise InvalidInputException if image has no name of width or depth

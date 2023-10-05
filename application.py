@@ -25,9 +25,20 @@ def initialize_measurements():
         return jsonify(str(e)), 422
     except Exception as e:
         print("HandledException: " + str(e))
-        return jsonify("HandledException: " + str(e)), 500
+        return jsonify("HandledException: " + str(e)), 501
 
     return jsonify("Successful configured"), 200
+
+@application.route("/clean_measurement", methods=["PUT"])
+def clean_measurement():
+    try:
+        MeasureCube().clean_measurement(firebase)
+    except Exception as e:
+        print("HandledException: " + str(e))
+        return jsonify("HandledException: " + str(e)), 501
+    
+    return jsonify("Successful updated"), 200
+
 
 @application.route('/measure_distances', methods=['POST'])
 def measure_distances():
@@ -37,8 +48,8 @@ def measure_distances():
         return jsonify(str(e)), 422
     except Exception as e:
         print("HandledException: " + str(e))
-        return jsonify("HandledException: " + str(e)), 500
-
+        return jsonify("HandledException: " + str(e)), 501
+        return "hola"
     return jsonify(distances), 200
 
 @application.route('/cube_data_for_cut_machine', methods=['GET'])
@@ -49,7 +60,7 @@ def cube_data_for_cut_machine():
         return jsonify(str(e)), 422
     except Exception as e:
         print("HandledException: " + str(e))
-        return jsonify("HandledException: " + str(e)), 500
+        return jsonify("HandledException: " + str(e)), 501
 
     return jsonify("Successful configured"), 200
 

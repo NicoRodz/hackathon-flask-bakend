@@ -21,19 +21,17 @@ class FirebaseHelperSingleton:
         doc_ref.set(data)
 
     def read_data(self, document_id):
-        doc_ref = self.db.collection('collection_name').document(document_id)
-        doc = doc_ref.get()
-        if doc.exists:
-            print(doc.to_dict())
-        else:
-            print("No such document!")
+        print("Read data not implemented!")
+        # doc_ref = self.db.collection('collection_name').document(document_id)
+        # doc = doc_ref.get()
+        # if doc.exists:
+        #     print(doc.to_dict())
+        # else:
+        #     print("No such document!")
 
-    def update_data(self, document_id):
-        doc_ref = self.db.collection('collection_name').document(document_id)
-        doc_ref.update({
-            'field_name': 'new_value',
-            # ... update more fields ...
-        })
+    def update_data(self, collection, document_id, data):
+        doc_ref = self.db.collection(collection).document(document_id)
+        doc_ref.update(data)
 
-    def delete_data(self, document_id):
-        self.db.collection('collection_name').document(document_id).delete()
+    def delete_data(self, collection, document_id):
+        self.db.collection(collection).document(document_id).delete()
