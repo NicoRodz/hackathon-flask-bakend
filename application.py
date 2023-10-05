@@ -4,8 +4,10 @@ from managers.measure_cube import MeasureCube
 from core.exceptions import InvalidInputException
 import os
 from core.constants import UPLOAD_FOLDER
+from flask_cors import CORS
 
 application = Flask(__name__)
+CORS(application)
 firebase = FirebaseHelperSingleton()
 
 if not os.path.exists(UPLOAD_FOLDER):
