@@ -74,18 +74,6 @@ def measure_distances():
         
     return jsonify(distances), 200
 
-@application.route('/cube_data_for_cut_machine', methods=['GET'])
-def cube_data_for_cut_machine():
-    try:
-        MeasureCube().show_cube_data(firebase, request)
-    except InvalidInputException as e:
-        return jsonify(str(e)), 422
-    except Exception as e:
-        print("HandledException: " + str(e))
-        return jsonify("HandledException: " + str(e)), 501
-
-    return jsonify("Successful configured"), 200
-
 if __name__ == "__main__":
     print("Running app...")
     application.run()

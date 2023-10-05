@@ -1,7 +1,7 @@
 from core.exceptions import InvalidInputException
 import os
 import zipfile
-from core.constants import UPLOAD_FOLDER, HARDCODED_MEASURE_RESPONSE
+from core.constants import UPLOAD_FOLDER
 from helpers.cv2 import CV2CubeMeasurement
 from helpers.files import FileHelper
 from helpers.math import MathHelper

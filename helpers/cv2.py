@@ -20,7 +20,13 @@ class CV2CubeMeasurement:
     @classmethod
     def measure_image(self, image_path):
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-        imgBlur = cv2.GaussianBlur(image, (5,5), 0)
+
+        ret, thresh = cv2.threshold(image,0,255,cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+        kernel = np.ones((5,5),np.uint8)
+        opening = cv2.morphologyEx(thresh,cv2.MORPH_OPEN, kernel, iterations = 2)
+        processed_kernel = np.ones((6,6),np.uint8)
+        dilate = cv2.dilate(opening, processed_kernel, iterations=3)
+        imgBlur = cv2.GaussianBlur(dilate, (5,5), 0)
 
         # Detectar bordes usando Canny
         border = cv2.Canny(imgBlur, 50, 150)
