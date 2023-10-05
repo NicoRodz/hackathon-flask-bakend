@@ -51,8 +51,6 @@ def cube_data_for_cut_machine():
 
     return jsonify("Successful configured"), 200
 
-
-
-
 if __name__ == "__main__":
+    print("Running app...")
     application.run()
