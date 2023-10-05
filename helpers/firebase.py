@@ -1,17 +1,24 @@
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-class FirebaseHelper:
+class FirebaseHelperSingleton:
+
+    db = None
+
+    def __new__(cls):
+        if cls.db is None:
+            cls.db = super(FirebaseHelperSingleton, cls).__new__(cls)
+        return cls.db
 
     def __init__(self):
+        print("__init__")
         cred = credentials.Certificate('./helpers/firebase_key_hackaton.json')
         firebase_admin.initialize_app(cred)
-
         self.db = firestore.client()
 
-    def create_data(self, collection ="lote", document="x"):
+    def create_data(self, collection, document, data):
         doc_ref = self.db.collection(collection).document(document)
-        doc_ref.set({'field_name': 'value'})
+        doc_ref.set(data)
 
     def read_data(self, document_id):
         doc_ref = self.db.collection('collection_name').document(document_id)

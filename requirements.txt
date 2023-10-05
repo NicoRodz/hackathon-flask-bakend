@@ -45,4 +45,4 @@ Werkzeug==3.0.0
 numpy
 opencv-python
 firebase-admin
-grpcio
+zipfile
