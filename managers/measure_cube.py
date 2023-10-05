@@ -10,7 +10,6 @@ class MeasureCube:
 
     collection = "active"
     measurement_document = "measurement"
-    cut_machine_document = "cut_machine"
 
     @classmethod
     def initialize(cls, firebase, request):
@@ -56,12 +55,3 @@ class MeasureCube:
 
         FileHelper.deep_folder_delete(full_extracted_files_path)
         return MathHelper.get_cube_measurements(measure_results)
-
-    @classmethod
-    def get_cube_data(cls, firebase, request):
-        cube_identifier = request.args.get('cube_identifier')
-
-        if cube_identifier is None:
-            raise InvalidInputException("Please provide the 'cube_identifier' value")
-        data = {"cube_identifier": cube_identifier}
-        firebase.create_data(cls.collection, cls.cut_machine_document, data)
