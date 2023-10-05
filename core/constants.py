@@ -1,5 +1,7 @@
 UPLOAD_FOLDER = "tmp"
 
+CSV_CORRECTION_FACTOR = 100
+
 
 HARDCODED_MEASURE_RESPONSE = {
             "height": {
