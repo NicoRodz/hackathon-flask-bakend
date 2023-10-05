@@ -2,6 +2,8 @@ from core.exceptions import InvalidInputException
 import os
 import zipfile
 from core.constants import UPLOAD_FOLDER, HARDCODED_MEASURE_RESPONSE
+# from helpers.cv2 import CV2CubeMeasurement
+from helpers.files import FileHelper
 
 class MeasureCube:
 
@@ -20,7 +22,6 @@ class MeasureCube:
 
     @classmethod
     def measure_distances(cls, request):
-        print(str(request.files))
         if 'file' not in request.files:
             raise InvalidInputException("Please provide a file with images")
 
@@ -32,11 +33,19 @@ class MeasureCube:
         zip_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(zip_path)
 
+        extracted_files_folder = 'extracted_files'
+        full_extracted_files_path = UPLOAD_FOLDER + "/" + extracted_files_folder + "/"
+
         with zipfile.ZipFile(zip_path, 'r') as zip_file:
-            zip_file.extractall(os.path.join(UPLOAD_FOLDER, UPLOAD_FOLDER + '/extracted_files/'))
+            zip_file.extractall(os.path.join(UPLOAD_FOLDER, extracted_files_folder))
 
-        #TODO logica de lectura del cubo
+        file_paths = FileHelper.get_filepaths_from_folder(full_extracted_files_path)
 
+        # measure_results = []
+        # for path in file_paths:
+        #     CV2CubeMeasurement.measure_image()
+
+        FileHelper.deep_folder_delete(full_extracted_files_path)
         return HARDCODED_MEASURE_RESPONSE
 
     @classmethod

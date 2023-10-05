@@ -1,0 +1,2 @@
+class MathHelper:
+    pass
