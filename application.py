@@ -15,7 +15,7 @@ if not os.path.exists(UPLOAD_FOLDER):
 
 @application.route('/')
 def hello():
-    return "¡Gogogogogogogo!"
+    return "Hackathon API"
 
 @application.route('/initialize_measurements', methods=['GET'])
 def initialize_measurements():
